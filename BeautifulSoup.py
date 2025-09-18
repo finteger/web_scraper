@@ -4,6 +4,9 @@ from selenium import webdriver
 import selenium.webdriver.chrome.service 
 import csv
 
+
+
+
 #set up the webdriver
 driver = webdriver.Chrome()
 
