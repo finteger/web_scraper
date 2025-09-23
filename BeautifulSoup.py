@@ -6,7 +6,6 @@ import csv
 
 
 
-
 #set up the webdriver
 driver = webdriver.Chrome()
 
@@ -40,9 +39,49 @@ if table:
             rows.append(row)
             
             
-print(headers)
-print(rows)
-            
+    print('Column headers:')
+    print(headers)
 
+    print('\nRow data:')
+    print(rows)
+
+    #create a tuple for the headers
+    header_tuple = (
+        'All items',
+        'Food',
+        'Shelter',
+        'Household operations, furnishings and equipment',
+        'Clothing and footwear',
+        'Transportation',
+        'Gasoline',
+        'Health & Personal Care',
+        'Recreation, education, and reading',
+        'Alcoholic beverages, tabacco products, & recreational cannabis',
+        'All-items excluding food and energy',
+        'All-items excluding energy',
+        'Energy',
+        'Goods',
+        'Services'
+    )
+
+    #write the data to csv (comma separated value file)
+    with open('table_data.csv', 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        
+        #insert a new column as the first column in each row
+        for i, row in enumerate(rows):
+            rows[i] = [header_tuple[i]] + row
+
+        #write the headers
+        writer.writerow(headers[2:8])
+        
+        writer.writerows(rows)
+        print('\nData is successsfully saved to csv file!')
+else:
+    print('Table not found on the webpage.')
+    
+            
+#close the driver from selenium
+driver.quit()
 
 
